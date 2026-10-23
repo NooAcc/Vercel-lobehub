@@ -2,6 +2,15 @@
   "buildCommand": "bun run build:vercel",
   "headers": [
     {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        }
+      ]
+    },
+    {
       "source": "/_spa/(.*)",
       "headers": [
         {
