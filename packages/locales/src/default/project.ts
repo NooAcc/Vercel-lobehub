@@ -8,7 +8,7 @@ export default {
   'settings.addDirectoryFailed': 'Could not add working directory',
   'settings.identifier': 'Project identifier',
   'settings.identifierDescription':
-    'Used in task references. This identifier is set when the project is created.',
+    'Prefix for this project’s task numbers, set when the project is created. Projects without one use the default prefix.',
   'settings.slugDescription':
     'Used in the project URL. Changing it updates the address; leave blank to use the project ID.',
   'settings.description': 'Description',
@@ -156,10 +156,15 @@ export default {
   'acceptance.success.start': 'Project started',
   'acceptance.title': 'Acceptance',
   'create.action': 'Create project',
-  'create.identifierDescription': 'Used as the task prefix, for example LOBE-123.',
+  'create.identifierDescription':
+    'Replaces the task number prefix for this project, for example ACE. Leave it empty to use the default prefix.',
   'create.identifierInvalid': 'Use 3–6 uppercase letters or numbers, starting with a letter.',
-  'create.identifierLabel': 'Identifier',
-  'create.identifierPlaceholder': 'LOBE',
+  'create.identifierLabel': 'Identifier (optional)',
+  'create.identifierPlaceholder': 'ACE',
+  'create.mainAgentDescription':
+    'Manages this project’s conversations, tasks, and goals. Your choice is reused next time.',
+  'create.mainAgentLabel': 'Main agent',
+  'create.mainAgentPlaceholder': 'Select an agent',
   'create.nameLabel': 'Project name',
   'create.namePlaceholder': 'What are you working on?',
   'create.slugDescription': 'Used for the project URL and generated from the project name.',
@@ -197,6 +202,7 @@ export default {
   'list.viewAll': 'View all projects',
   'overview.noDescription': 'A dedicated workspace for this long-running goal.',
   'overview.activeTasks': 'In progress',
+  'overview.agentSelect': 'Choose an agent',
   'overview.contextTitle': 'Project context',
   'overview.description': 'Start with a question, or review the project’s progress and outputs.',
   'overview.goalCount': '{{completed}} of {{total}} goals completed',
@@ -306,6 +312,7 @@ export default {
   'settings.members': 'Members',
   'overview.createTask': 'Create task',
   'overview.createTaskFailed': 'Could not create the task',
+  'overview.messageNotSent': 'The message was not sent. Your draft has been kept.',
   'overview.mode.chat': 'Chat',
   'overview.mode.task': 'Task',
   'overview.sendFailed': 'Could not create the topic',
