@@ -2424,14 +2424,11 @@ export default {
   'goalProcess.acceptanceHierarchy.acceptAllTitle': 'Accept every waiting acceptance?',
   'goalProcess.acceptanceHierarchy.acceptError': 'Could not save the sign-off. Try again.',
   'goalProcess.acceptanceHierarchy.accepted': 'Accepted “{{title}}”',
-  'goalProcess.acceptanceHierarchy.checksError': 'Failed to load this acceptance’s checks',
-  'goalProcess.acceptanceHierarchy.collapseAll': 'Collapse all',
   'goalProcess.acceptanceHierarchy.criterion.failed': 'Failed',
   'goalProcess.acceptanceHierarchy.criterion.passed': 'Passed',
   'goalProcess.acceptanceHierarchy.criterion.unjudged': 'Undecided',
   'goalProcess.acceptanceHierarchy.error':
     'Failed to load the acceptance levels, so no level’s standing can be read.',
-  'goalProcess.acceptanceHierarchy.expandAll': 'Expand all',
   'goalProcess.acceptanceHierarchy.group': 'Related acceptances',
   'goalProcess.acceptanceHierarchy.level.awaitingSignOff': 'Awaiting your sign-off',
   'goalProcess.acceptanceHierarchy.level.closed': 'Closed',
@@ -2439,8 +2436,6 @@ export default {
   'goalProcess.acceptanceHierarchy.level.rejected': 'Sent back',
   'goalProcess.acceptanceHierarchy.level.signedOff': 'Signed off',
   'goalProcess.acceptanceHierarchy.level.unavailable': 'No acceptance',
-  'goalProcess.acceptanceHierarchy.noChecks': 'This acceptance has no checks yet',
-  'goalProcess.acceptanceHierarchy.retry': 'Reload',
   'goalProcess.acceptanceHierarchy.tally.failed': '{{count}} failed',
   'goalProcess.acceptanceHierarchy.tally.passed': '{{count}} passed',
   'goalProcess.acceptanceHierarchy.tally.unjudged': '{{count}} undecided',
@@ -2542,10 +2537,14 @@ export default {
   'goalProcess.gate.reason.verifyInternalError':
     'Verification could not run (internal error); this delivery was not evaluated',
   'goalProcess.gate.reason.verifyFailed': 'Task {{id}} did not pass verification',
+  'goalProcess.gate.reason.verifyStalled':
+    'Task {{id}} failed verification the same way {{count}} times in a row, so it was not retried again',
   'goalProcess.gate.reason.goalAcceptanceFailed': 'Goal-level acceptance did not pass',
   'goalProcess.gate.reason.attemptBudgetExhausted': 'The attempt budget for this work is used up',
   'goalProcess.gate.reason.costBudgetExhausted': 'The goal cost budget is used up',
   'goalProcess.gate.reason.recoveryFailed': 'Automatic recovery could not start the next attempt',
+  'goalProcess.gate.reason.recoveryFailedWithError':
+    'Automatic recovery could not start the next attempt: {{error}}',
   'goalProcess.gate.reason.batchReleaseProbes':
     'The v{{revision}} experiments finished; start batch execution with wave {{wave}} ({{count}} units)',
   'goalProcess.gate.reason.batchReleaseRevised':
@@ -2906,6 +2905,13 @@ export default {
   'goalProcess.decisions.title': 'Decisions',
   'goalProcess.decisions.empty': 'No decision has been asked on this goal yet.',
   'goalProcess.decisions.pending': 'Awaiting decision',
+  'goalProcess.decisions.chosen': 'Chosen',
+  'goalProcess.decisions.openNode': 'Open this decision',
+  'goalProcess.decisions.recommended': 'Recommended',
+  'goalProcess.decisions.raisedBy': 'Raised by',
+  'goalProcess.decisions.effect.fail': 'Fails the goal',
+  'goalProcess.decisions.effect.retire': 'Retires the task',
+  'goalProcess.decisions.effect.retry': 'Runs the task again',
   'goalProcess.findings.title': 'Findings',
   'goalProcess.findings.empty': 'No findings yet.',
   'goalProcess.findings.answers': 'Answers “{{title}}”',
