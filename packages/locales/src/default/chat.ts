@@ -1,4 +1,9 @@
 export default {
+  'sharePage.app.open': 'Open app',
+  'sharePage.app.help': 'Trouble opening the app?',
+  'sharePage.app.helpDescription':
+    'If this browser prevents opening the app, use its menu to open this page in your system browser. You can also keep reading here.',
+
   'backgroundActivity.alertDesc': '{{name}} is using {{memory}} of memory and {{cpu}} CPU.',
   'backgroundActivity.cpu': 'CPU',
   'backgroundActivity.details': 'View details',
@@ -337,6 +342,9 @@ export default {
     'Are you sure you want to uncompress? This will restore the original messages.',
   'compression.collapsed': 'Compressed {{turns}} earlier turns · View summary',
   'compression.collapsedUnknown': 'Compressed earlier history · View summary',
+  'compression.emptySummary': 'The model returned an empty summary',
+  'compression.failed': 'Context compression failed, original messages kept',
+  'compression.failedReason': 'Summary generation failed: {{reason}}',
   'compression.history': 'Original conversation',
   'compression.summary': 'History summary',
   'confirmClearCurrentMessages':
@@ -1098,13 +1106,27 @@ export default {
   'messageForward.successMulti': 'Forwarded to {{count}} agents',
   'messageForward.transcript.header':
     'The following {{count}} messages were forwarded from another conversation. Please use them as context and continue:',
-  'messageForward.topic.handoffFailed':
-    'Transfer did not start because the source continuation could not be cancelled. It may already be running. Refresh the conversation and check its status.',
-  'messageForward.topic.sourceSchedulePaused':
-    'Transfer could not be confirmed. The original scheduled continuation is paused. Check the target conversation before retrying or scheduling again.',
   'messageForward.topic.context': 'Topic context',
   'messageForward.topic.description':
     "The selected Agent will receive this topic's context and continue the work.",
+  'messageForward.topic.handoff.failed': 'Could not hand off this topic. Please try again.',
+  'messageForward.topic.handoff.header':
+    'The following topic was handed off from another conversation. Please use it as context and continue:',
+  'messageForward.topic.handoff.notStarted':
+    'Handoff did not start because the source continuation could not be cancelled. It may already be running. Refresh the conversation and check its status.',
+  'messageForward.topic.handoff.notePlaceholder':
+    'Add a note (optional) — sent along with the topic context',
+  'messageForward.topic.handoff.partialFailed': 'Could not hand off to some Agents',
+  'messageForward.topic.handoff.sourceSchedulePaused':
+    'Handoff could not be confirmed. The original scheduled continuation is paused. Check the target conversation before retrying or scheduling again.',
+  'messageForward.topic.handoff.submit': 'Hand off',
+  'messageForward.topic.handoff.submitCount': 'Hand off ({{count}})',
+  'messageForward.topic.handoff.success': 'Handed off to {{title}}',
+  'messageForward.topic.handoff.successMulti_one': 'Handed off to {{count}} Agent',
+  'messageForward.topic.handoff.successMulti_other': 'Handed off to {{count}} Agents',
+  'messageForward.topic.handoff.title': 'Hand off to another Agent',
+  'messageForward.topic.handoff.unconfirmed':
+    'Handoff could not be confirmed. Check the target conversation before trying again.',
   'messageForward.topic.header':
     'The following topic was forwarded from another conversation. Please use it as context and continue:',
   'messageForward.topic.loadFailed': 'Could not load this topic for forwarding',
@@ -1236,9 +1258,9 @@ export default {
   'cliOverloadedGuide.retryHint':
     'Wait a few seconds and retry. If it keeps failing, the provider may be having a wider incident.',
   'cliOverloadedGuide.title': '{{name}} is temporarily overloaded',
+  'cliRateLimitGuide.actions.handoff': 'Hand off to another Agent',
   'cliRateLimitGuide.actions.openSystemTools': 'Open System Tools',
   'cliRateLimitGuide.actions.retry': 'Retry message',
-  'cliRateLimitGuide.actions.transfer': 'Transfer to another Agent',
   'cliRateLimitGuide.afterReset':
     'This account has reached its current usage limit. You can continue after {{resetAt}}.',
   'cliRateLimitGuide.afterResetWithLimitType':
@@ -1263,7 +1285,6 @@ export default {
   'cliRateLimitGuide.schedule.continueAfter': 'Continue in ~{{duration}}',
   'cliRateLimitGuide.schedule.continueAfterReset': 'Continue after reset',
   'cliRateLimitGuide.schedule.retryNow': 'Retry now',
-  'cliRateLimitGuide.schedule.runNow': 'Run now',
   'cliRateLimitGuide.schedule.scheduledAfterReset':
     'Scheduled. This run will continue automatically once the limit resets.',
   'cliRateLimitGuide.schedule.scheduledForApprox':
@@ -1863,12 +1884,16 @@ export default {
   'signalCallbacks.empty': 'No callback messages',
   'signalCallbacks.expand': 'Show details',
   'signalCallbacks.title': '{{tool}} · {{count}} callback updates',
+  'taskCompletion.title': '{{tool}} "{{description}}" finished',
+  'taskCompletion.titleWithoutDescription': '{{tool}} finished',
   'skillViewer.files': 'Files',
   'skillViewer.foldFiles': 'Hide files',
   'skillViewer.unfoldFiles': 'Show files',
   'stt.action': 'Voice Input',
   'stt.loading': 'Recognizing...',
   'stt.prettifying': 'Polishing...',
+  'subAgentCallback.failed': 'Did not finish',
+  'subAgentCallback.tag': 'Sub-agent',
   'supervisor.label': 'Orchestrator',
   'supervisor.todoList.allComplete': 'All tasks completed',
   'supervisor.todoList.title': 'Tasks Completed',
@@ -2515,7 +2540,8 @@ export default {
   'goalProcess.acceptance.errored': 'Verification error',
   'goalProcess.acceptance.rejected': 'Rejected',
   'goalProcess.tag.verifying': 'Verifying',
-  'goalProcess.tag.lost': 'Lost',
+  'goalProcess.tag.stalled': 'Stalled',
+  'goalProcess.tag.waitingQuota': 'Waiting for quota',
   'goalProcess.tag.done': 'Done',
   'goalProcess.tag.retired': 'Retired',
   'goalProcess.gate.decisionPointLabel': 'What needs your decision',
@@ -2651,8 +2677,12 @@ export default {
   'goalProcess.attempts.failed': 'Did not pass',
   'goalProcess.attempts.retired': 'Retired',
   'goalProcess.attempts.running': 'Running',
-  'goalProcess.stale.description':
-    'No heartbeat for {{duration}}. The next advance marks this attempt lost and starts a fresh one — it does not count as a failure.',
+  'goalProcess.stalled.description':
+    'Last heartbeat {{duration}}. The next advance restarts this attempt — it does not count as a failure.',
+  'goalProcess.quota.resumeAt': 'Resumes {{time}}',
+  'goalProcess.quota.resumeSoon': 'Resuming soon',
+  'goalProcess.quota.tooltip':
+    'The usage limit was reached. The goal resumes this task on its own once the quota resets — it does not count as a failure.',
   'goalProcess.running.elapsed': 'Running {{duration}}',
   'goalProcess.graph.title': 'Exploration map',
   'goalProcess.graph.view.stage': 'Current stage',
@@ -2672,7 +2702,6 @@ export default {
   'goalProcess.result.continueSeed.open': 'Still open:',
   'goalProcess.result.continueSeed.requirement': 'Original requirement:',
   'goalProcess.result.continueSeed.title': 'Continue: {{title}}',
-  'goalProcess.result.criteria.document': 'Evidence document',
   'goalProcess.result.criteria.empty': 'This Goal has no structured acceptance criteria.',
   'goalProcess.result.criteria.evidenceCount': '{{count}} evidence',
   'goalProcess.result.criteria.state.failed': 'Not met',
@@ -3157,7 +3186,8 @@ export default {
   'tool.intervention.mode.autoRun': 'Auto Approve',
   'tool.intervention.mode.autoRunDesc': 'Automatically approve all tool executions',
   'tool.intervention.mode.manual': 'Manual',
-  'tool.intervention.mode.manualDesc': 'Manual approval required for each invocation',
+  'tool.intervention.mode.manualDesc':
+    'Asks before each invocation, except actions you chose not to be asked about again',
   'tool.intervention.onboarding.agentIdentity.editHint':
     'You can edit the name or avatar directly below.',
   'tool.intervention.onboarding.agentIdentity.namePlaceholder': 'Agent name',
@@ -3594,7 +3624,7 @@ export default {
   'workingPanel.works.emptyVersions': 'No versions yet',
   'workingPanel.works.error': 'Failed to load works',
   'workingPanel.works.documentLoadError': 'Failed to load document',
-  'workingPanel.works.canvasPublished': 'Published',
+  'workingPanel.works.canvasShared': 'Shared',
   'workingPanel.works.canvasUntitled': 'Untitled canvas',
   'workingPanel.works.changeType.created': 'Created',
   'workingPanel.works.changeType.updated': 'Updated',
