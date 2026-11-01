@@ -198,3 +198,26 @@ export const isFieldReleased = (
   field: Pick<FieldSchema, 'featureFlag'>,
   featureFlags: Record<string, unknown> | undefined,
 ): boolean => !field.featureFlag || featureFlags?.[field.featureFlag] === true;
+
+/**
+ * The master switch of the bot-wake options, stored as the off switch: a bot that never touched it
+ * speaks up on its own. A plain on/off, so it saves the moment it changes, like the reply display
+ * options.
+ */
+export const WAKE_MASTER_KEY = 'botWakeDisabled';
+
+/**
+ * Settings for a bot being created for a heterogeneous agent (Claude Code, Codex): the wake switch
+ * starts off, since such an agent joins conversations only once its owner turns it on. A choice
+ * already made is kept.
+ */
+export const withHeterogeneousWakeOff = (
+  schema: FieldSchema[] | undefined,
+  settings: Record<string, unknown>,
+): Record<string, unknown> => {
+  const fields = schema?.find((field) => field.key === 'settings')?.properties ?? [];
+  if (settings[WAKE_MASTER_KEY] !== undefined) return settings;
+  if (!fields.some((field) => field.key === WAKE_MASTER_KEY)) return settings;
+
+  return { ...settings, [WAKE_MASTER_KEY]: true };
+};

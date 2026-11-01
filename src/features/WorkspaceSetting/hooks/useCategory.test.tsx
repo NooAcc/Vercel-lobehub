@@ -91,7 +91,7 @@ describe('workspace settings useCategory', () => {
     );
   });
 
-  it('shows About in a System group for every role', () => {
+  it('shows Trash and About in a System group for every role', () => {
     mocks.canCreateContent = false;
     mocks.canManageWorkspace = false;
     mocks.canViewBilling = false;
@@ -101,14 +101,19 @@ describe('workspace settings useCategory', () => {
       (group) => group.key === WorkspaceSettingsGroupKey.System,
     );
 
-    expect(systemGroup?.items.map((item) => item.key)).toEqual([WorkspaceSettingsTabs.About]);
+    expect(systemGroup?.items.map((item) => item.key)).toEqual([
+      WorkspaceSettingsTabs.Trash,
+      WorkspaceSettingsTabs.About,
+    ]);
     expect(result.current.map((group) => group.key).slice(-2)).toEqual([
       WorkspaceSettingsGroupKey.System,
       WorkspaceSettingsGroupKey.Developer,
     ]);
   });
 
-  it('groups devices, subscription accounts and environments under Resources', () => {
+  // The drives need no opt-in: every member sees the tab, which shows the
+  // public drive, their own, and the way to a plan when the workspace has none.
+  it('groups devices, subscription accounts, environments and drives under Resources', () => {
     const { result } = renderHook(() => useWorkspaceSettingCategory(), { wrapper });
     const keys = result.current.map((group) => group.key);
     const resourceGroup = result.current.find(
@@ -125,6 +130,7 @@ describe('workspace settings useCategory', () => {
       WorkspaceSettingsTabs.Devices,
       WorkspaceSettingsTabs.SubscriptionAccounts,
       WorkspaceSettingsTabs.Environments,
+      WorkspaceSettingsTabs.Drive,
     ]);
     expect(generalGroup?.items.map((item) => item.key)).not.toContain(
       WorkspaceSettingsTabs.Devices,

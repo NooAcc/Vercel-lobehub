@@ -30,6 +30,7 @@ import {
   ScrollText,
   Sparkles,
   TagIcon,
+  Trash2,
   Users,
   UsersRound,
 } from 'lucide-react';
@@ -81,7 +82,6 @@ export const useWorkspaceSettingCategory = (): WorkspaceSettingCategoryGroup[] =
   const { allowed: canCreateContent } = usePermission('create_content');
   const enableOAuthApps = useUserStore(labPreferSelectors.enableOAuthApps);
   const enableIntegrations = useUserStore(labPreferSelectors.enableIntegrations);
-  const enablePersistentSandbox = useUserStore(labPreferSelectors.enablePersistentSandbox);
   const { hideDocs } = useServerConfigStore(featureFlagsSelectors);
   const [avatar, username] = useUserStore((s) => [
     userProfileSelectors.userAvatar(s),
@@ -212,9 +212,8 @@ export const useWorkspaceSettingCategory = (): WorkspaceSettingCategoryGroup[] =
               key: WorkspaceSettingsTabs.Environments,
               label: t('tab.environments'),
             },
-            // The public drive and the member's own, with the pool's usage —
-            // behind the same lab switch as the composer's folder picker.
-            enablePersistentSandbox && {
+            // The public drive and the member's own, with the pool's usage.
+            {
               icon: HardDriveIcon,
               key: WorkspaceSettingsTabs.Drive,
               label: t('tab.drive'),
@@ -321,15 +320,21 @@ export const useWorkspaceSettingCategory = (): WorkspaceSettingCategoryGroup[] =
           title: t('workspaceSetting.group.admin'),
         },
         // System group: Storage stays in Admin because it is workspace-scoped
-        // there; About is informational and visible to every role.
-        !hideDocs && {
+        // there. Trash is visible to every role — the server shows owners the
+        // whole bin and members only what they deleted. About is informational.
+        {
           items: [
             {
+              icon: Trash2,
+              key: WorkspaceSettingsTabs.Trash,
+              label: t('tab.trash'),
+            },
+            !hideDocs && {
               icon: Info,
               key: WorkspaceSettingsTabs.About,
               label: t('tab.about'),
             },
-          ],
+          ].filter(Boolean) as WorkspaceSettingCategoryItem[],
           key: WorkspaceSettingsGroupKey.System,
           title: t('group.system'),
         },
@@ -370,7 +375,6 @@ export const useWorkspaceSettingCategory = (): WorkspaceSettingCategoryGroup[] =
       tSubscription,
       enableOAuthApps,
       enableIntegrations,
-      enablePersistentSandbox,
       canManageWorkspace,
       canViewBilling,
       canCreateContent,
